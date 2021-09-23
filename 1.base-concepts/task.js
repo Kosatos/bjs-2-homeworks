@@ -22,7 +22,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
   percent = +percent / 100;
   let creditBody = Number(amount) - Number(contribution);
-  let months = +monthsDiff();
+  let months = monthsDiff();
   function monthsDiff() {
     let presentDate = new Date();
     let year1 = presentDate.getFullYear();
