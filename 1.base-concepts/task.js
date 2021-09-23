@@ -21,45 +21,46 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	'use strict';
 
   // Проверки на тип данных
+  
   let percentValue = percent;
 	if (typeof percent === 'string') {
 		percent = +percent;
-    if (isNaN(percent)) {
-      const warningPercent = `Параметр "Процентная ставка" содержит неправильное значение "${percentValue}"`;
-      console.log(warningPercent);
-      return warningPercent;
-    }
-  }
+		if (isNaN(percent)) {
+			const warningPercent = `Параметр "Процентная ставка" содержит неправильное значение "${percentValue}"`;
+			console.log(warningPercent);
+			return warningPercent;
+		}
+  	}
 
   let contributionValue = contribution;
 	if (typeof contribution === 'string') {
 		contribution = +contribution;
-	  if (isNaN(contribution)) {
-    const warningContribution = `Параметр "Начальный взнос" содержит неправильное значение "${contributionValue}"`;
-		console.log(warningContribution);
-    return warningContribution;
-    }
+	  	if (isNaN(contribution)) {
+			const warningContribution = `Параметр "Начальный взнос" содержит неправильное значение "${contributionValue}"`;
+			console.log(warningContribution);
+			return warningContribution;
+        }
 	}
 
   let amountValue = amount;
 	if (typeof amount === 'string') {
 		amount = +amount;
-	  if (isNaN(amount)) {
-    const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
+	  	if (isNaN(amount)) {
+		const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
 		console.log(warningAmount);
-    return warningAmount;
-    }
+		return warningAmount;
+		}
 	}
 
   // Проверка на корректность ввода даты
 
-  const presentDate = new Date();
+  	const presentDate = new Date();
 	const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
 
 	if ((date.getTime() - presentDate.getTime()) < (nextMonth.getTime() - presentDate.getTime()) && presentDate.getFullYear() == date.getFullYear()) {
-    const warningDate = 'Введите корректную дату';
+		const warningDate = 'Введите корректную дату';
 		console.log(warningDate);
-    return warningDate;
+		return warningDate;
 	}
 
 	let totalAmount;
@@ -69,6 +70,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	let creditBody = amount - contribution;
   
 	let months = monthsDiff();
+
 	function monthsDiff() {
 		let month1 = presentDate.getMonth();
 		let month2 = date.getMonth();
@@ -81,6 +83,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 		}
 		return (numberOfMonths = (year2 - year1) * 12 + (month2 - month1));
 	}
+	
 	let monthlyPayment = creditBody * (percent / 12 + percent / 12 / ((1 + percent / 12) ** months - 1));
 	totalAmount = +(monthlyPayment * months).toFixed(2);
   
