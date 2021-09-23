@@ -25,7 +25,6 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let months = monthsDiff();
   function monthsDiff() {
     let presentDate = new Date(2021, 9, 23);
-    let futureDate = new Date(2023, 4, 23);
     let year1 = presentDate.getFullYear();
     let year2 = date.getFullYear();
     let month1 = presentDate.getMonth();
