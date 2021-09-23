@@ -23,9 +23,8 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   percent = +percent / 100;
   let creditBody = Number(amount) - Number(contribution);
   let months = monthsDiff();
-  let numberOfMonths;
   function monthsDiff() {
-
+    let numberOfMonths;
     let presentDate = new Date();
     let year1 = presentDate.getFullYear();
     let year2 = date.getFullYear();
@@ -38,6 +37,6 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     return numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
   }
   let monthlyPayment = (creditBody * ((percent / 12) + (percent / 12) / (((1 + (percent / 12)) ** months) - 1)));
-  totalAmount = +contribution + (monthlyPayment * months) + (percent * amount);
-  return totalAmount.toFixed(2);
+  totalAmount = monthlyPayment * months;
+  return +totalAmount.toFixed(2);
 }
