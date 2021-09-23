@@ -22,7 +22,20 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
   percent = +percent / 100;
   let creditBody = Number(amount) - Number(contribution);
-  let months = date.getDate();
+  let months = monthsDiff();
+  function monthsDiff() {
+    let presentDate = new Date(2021, 9, 23);
+    let futureDate = new Date(2023, 4, 23);
+    let year1 = presentDate.getFullYear();
+    let year2 = date.getFullYear();
+    let month1 = presentDate.getMonth();
+    let month2 = date.getMonth();
+    if (month1===0) { 
+      month1++;
+      month2++;
+    }
+    return numberOfMonths = (year2 - year1) * 12 + (month2 - month1) + 1;
+  }
   let monthlyPayment = (creditBody * ((percent / 12) + (percent / 12) / (((1 + (percent / 12)) ** months) - 1)));
   totalAmount = +contribution + (monthlyPayment * months) + (percent * amount);
   return totalAmount.toFixed(2);
