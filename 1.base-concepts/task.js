@@ -25,7 +25,31 @@ function solveEquation(a, b, c) {
 		return [- b / (2 * a)];
 	}
 	return [];
-  }
+}
+
+
+
+
+
+
+//   Проверка на корректность ввода даты
+const presentDate = new Date();
+const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+
+function monthsDiff(date) {
+	let month1 = presentDate.getMonth();
+	let month2 = date.getMonth();
+	let year1 = presentDate.getFullYear();
+	let year2 = date.getFullYear();
+	let numberOfMonths;
+	if (month1 === 0) {
+		month1++;
+		month2++;
+	}
+	return (numberOfMonths = (year2 - year1) * 12 + (month2 - month1));
+}
+
+
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
 	'use strict';
@@ -64,8 +88,8 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   // Проверка на корректность ввода даты
 
-  	const presentDate = new Date();
-	const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+  	// const presentDate = new Date();
+	// const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
 
 	if ((date.getTime() - presentDate.getTime()) < (nextMonth.getTime() - presentDate.getTime()) && presentDate.getFullYear() == date.getFullYear()) {
 		const warningDate = 'Введите корректную дату';
@@ -79,7 +103,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
 	let creditBody = amount - contribution;
   
-	// let months = monthsDiff();
+	let months = monthsDiff(date);
 
 	// function monthsDiff() {
 	// 	let month1 = presentDate.getMonth();
@@ -94,19 +118,21 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	// 	return (numberOfMonths = (year2 - year1) * 12 + (month2 - month1));
 	// }
 
-	let month1 = presentDate.getMonth();
-	let month2 = date.getMonth();
-	let year1 = presentDate.getFullYear();
-	let year2 = date.getFullYear();
-	if (month1 === 0) {
-		month1++;
-		month2++;
-	}
+	// let month1 = presentDate.getMonth();
+	// let month2 = date.getMonth();
+	// let year1 = presentDate.getFullYear();
+	// let year2 = date.getFullYear();
+	// if (month1 === 0) {
+	// 	month1++;
+	// 	month2++;
+	// }
 	
-	let months = (year2 - year1) * 12 + (month2 - month1);
+	// let months = (year2 - year1) * 12 + (month2 - month1);
 	
 	let monthlyPayment = creditBody * (percent / 12 + percent / 12 / ((1 + percent / 12) ** months - 1));
 	totalAmount = +(monthlyPayment * months).toFixed(2);
   
 	return totalAmount;
 }
+
+
