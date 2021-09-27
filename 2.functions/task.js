@@ -35,8 +35,7 @@ function makeWork(arrOfArr, func) {
   let max = -Infinity;
 
   for(let i = 0; i < arrOfArr.length; i++) {
-    const sum = func(arrOfArr[i]);
-    sum > max ? max = sum : max = max;
+    func(arrOfArr[i]) > max ? max = func(arrOfArr[i]) : max = max;
   }
 
   return max
@@ -44,5 +43,15 @@ function makeWork(arrOfArr, func) {
 
 // Задание 3
 function worker2(arr) {
-  // Ваш код
+  let min, max;
+
+  min = arr[0];
+  max = arr[0];
+
+  for(let i = 0; i < arr.length; i++) {
+    arr[i] > max ? max = arr[i] : max = max;
+    arr[i] < min ? min = arr[i] : min = min;
+  }
+
+  return Math.abs(max - min);
 }

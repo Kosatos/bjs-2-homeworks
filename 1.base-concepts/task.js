@@ -1,3 +1,5 @@
+// ЗАДАЧА 1
+
 // function solveEquation(a, b, c) {
 // 	"use strict";
 // 	let arr = [];
@@ -28,9 +30,7 @@ function solveEquation(a, b, c) {
 }
 
 
-
-
-
+//   ЗАДАЧА 2
 
 //   Проверка на корректность ввода даты
 const presentDate = new Date();
@@ -56,35 +56,59 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   // Проверки на тип данных
   
-  let percentValue = percent;
-	if (typeof percent === 'string') {
+	let percentValue = percent;
+	if(typeof percent === 'number') {
+		percent = percent;
+	} else if (typeof percent !== 'number') {
 		percent = +percent;
-		if (isNaN(percent)) {
+		if (isNaN(percent) || percent <= 0) {
 			const warningPercent = `Параметр "Процентная ставка" содержит неправильное значение "${percentValue}"`;
 			console.log(warningPercent);
 			return warningPercent;
 		}
-  	}
+  	}	
 
-  let contributionValue = contribution;
-	if (typeof contribution === 'string') {
+ 	let contributionValue = contribution;
+	if(typeof contribution === 'number') {
+		contribution = contribution;
+	} else if (typeof contribution !== 'number') {
 		contribution = +contribution;
-	  	if (isNaN(contribution)) {
+		if (isNaN(contribution) || contribution < 0) {
 			const warningContribution = `Параметр "Начальный взнос" содержит неправильное значение "${contributionValue}"`;
 			console.log(warningContribution);
 			return warningContribution;
-        }
-	}
-
-  let amountValue = amount;
-	if (typeof amount === 'string') {
-		amount = +amount;
-	  	if (isNaN(amount)) {
-		const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
-		console.log(warningAmount);
-		return warningAmount;
 		}
-	}
+	} 
+
+	 // if (typeof contribution === 'string') {
+	// 	contribution = +contribution;
+	//   	if (isNaN(contribution)) {
+	// 		const warningContribution = `Параметр "Начальный взнос" содержит неправильное значение "${contributionValue}"`;
+	// 		console.log(warningContribution);
+	// 		return warningContribution;
+    //     }
+	// }
+
+	let amountValue = amount;
+	if(typeof amount === 'number') {
+		amount = amount;
+	} else if (typeof amount !== 'number') {
+		amount = +amount;
+		if (isNaN(amount) || amount < 0) {
+			const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
+			console.log(warningAmount);
+			return warningAmount;
+		}
+  	}
+
+	// if (typeof amount === 'string') {
+	// 	amount = +amount;
+	//   	if (isNaN(amount)) {
+	// 	const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
+	// 	console.log(warningAmount);
+	// 	return warningAmount;
+	// 	}
+	// }
 
   // Проверка на корректность ввода даты
 
