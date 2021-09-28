@@ -28,7 +28,7 @@ function worker(arr) {
   }
 
   return sum;
-}Л
+}
 
 function makeWork(arrOfArr, func) {
   let max = -Infinity;
