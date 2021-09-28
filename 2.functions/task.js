@@ -11,8 +11,7 @@ function getArrayParams(arr) {
     sum += arr[i];
 
     if (arr[i] < -100 || arr[i] > 100) {
-      const warning = 'Введите число в диапазоне от -100 до 100';
-      return warning;
+      return 'Введите число в диапазоне от -100 до 100';
     }
   }
 
@@ -29,13 +28,14 @@ function worker(arr) {
   }
 
   return sum;
-}
+}Л
 
 function makeWork(arrOfArr, func) {
   let max = -Infinity;
 
   for(let i = 0; i < arrOfArr.length; i++) {
-    func(arrOfArr[i]) > max ? max = func(arrOfArr[i]) : max = max;
+    let attachment = func(arrOfArr[i]);
+    attachment > max ? max = attachment : max = max;
   }
 
   return max
