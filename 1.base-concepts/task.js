@@ -60,7 +60,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	if(typeof percent === 'number') {
 		percent = percent;
 	} else if (typeof percent !== 'number') {
-		percent = +percent;
+		percent = parseInt(percent, 10);
 		if (isNaN(percent) || percent <= 0) {
 			const warningPercent = `Параметр "Процентная ставка" содержит неправильное значение "${percentValue}"`;
 			console.log(warningPercent);
@@ -72,7 +72,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	if(typeof contribution === 'number') {
 		contribution = contribution;
 	} else if (typeof contribution !== 'number') {
-		contribution = +contribution;
+		contribution = parseInt(contribution, 10);
 		if (isNaN(contribution) || contribution < 0) {
 			const warningContribution = `Параметр "Начальный взнос" содержит неправильное значение "${contributionValue}"`;
 			console.log(warningContribution);
@@ -93,7 +93,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	if(typeof amount === 'number') {
 		amount = amount;
 	} else if (typeof amount !== 'number') {
-		amount = +amount;
+		amount = parseInt(amount, 10);
 		if (isNaN(amount) || amount < 0) {
 			const warningAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amountValue}"`;
 			console.log(warningAmount);
