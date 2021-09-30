@@ -6,7 +6,7 @@ function compareArrays(arr1, arr2) {
   }
 }
 
-function advancedFilter(arr) {
+  function advancedFilter(arr) {
   let resultArr;
 
   resultArr = (arr.filter(item => item > 0 && item % 3 === 0)).map(item => item * 10);
