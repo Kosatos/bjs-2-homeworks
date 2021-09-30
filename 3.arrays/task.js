@@ -1,9 +1,9 @@
 function compareArrays(arr1, arr2) {
-  let result;
-
-  result = arr1.every((idx) => arr1[idx] === arr2[idx]);
-
-  return result; // boolean
+  if (arr1.length === arr2.length) {
+    return arr1.every((item, idx) => item === arr2[idx]); // boolean
+  } else {
+    return false;
+  }
 }
 
 function advancedFilter(arr) {
