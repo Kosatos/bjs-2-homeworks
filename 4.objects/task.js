@@ -16,11 +16,11 @@ Student.prototype.addMark = function (mark) {
   }
 }
 
-Student.prototype.addMarks = function (...marks) {
+Student.prototype.addMarks = function (...mark) {
   if (this.marks === undefined) {
     this.marks = marks;
   } else {
-    this.marks.push(marks);
+    this.marks.push(mark);
   }
 }
 
