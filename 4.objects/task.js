@@ -21,6 +21,11 @@ Student.prototype.addMarks = function (...markValue) {
     this.marks = [];
     for(const item of markValue) {
       this.marks.push(item);
+    } 
+  } else {
+    for(const item of markValue) {
+      this.marks.push(item);
+    }
   }
 }
 
