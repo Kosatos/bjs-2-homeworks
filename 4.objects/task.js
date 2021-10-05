@@ -17,11 +17,9 @@ Student.prototype.addMark = function (mark) {
 }
 
 Student.prototype.addMarks = function (...markValue) {
-  let marksValue = markValue
   if (this.marks === undefined) {
-    this.marks = markValue;
-  } else {
-    for(const item of marksValue) {
+    this.marks = [];
+    for(const item of markValue) {
       this.marks.push(item);
   }
 }
