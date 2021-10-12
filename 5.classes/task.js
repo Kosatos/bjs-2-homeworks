@@ -9,7 +9,7 @@ class PrintEditionItem {
         this.type = null;
     }
 
-    fix = function() {
+    fix() {
         this.state *= 1.5;
     }
 
@@ -71,17 +71,17 @@ class Library {
         this.books = [];
     }
 
-    addBook = function(book) {
+    addBook(book) {
         if(book.state > 30) {
             this.books.push(book);
         }
     }
 
-    findBookBy = function(type, value) {
+    findBookBy(type, value) {
         return this.books.find(item => item[type] === value) || null;
     }
 
-    giveBookByName = function(bookName) {
+    giveBookByName(bookName) {
         const deleteBook = this.books.find(item => item.name === bookName);
         this.books.splice(this.books.indexOf(deleteBook), 1);
         return  deleteBook || null;
@@ -98,11 +98,11 @@ class Student {
         this.subjects = [];
     }
 
-    setSubject = function(subjectName) {
+    setSubject(subjectName) {
         this.subjects.push(new Subject(subjectName));
     }
 
-    addMark = function(mark, subjectName) {
+    addMark(mark, subjectName) {
         if (isNaN(parseInt(mark, 10)) || parseInt(mark, 10) < 1 ||  parseInt(mark, 10) > 5 ) {
             return console.error('Ошибка, оценка должна быть числом от 1 до 5');
         }
@@ -116,14 +116,10 @@ class Student {
 
         const subjectIndex = this.subjects.indexOf(findSubject);
 
-        if (findSubject.marks === undefined){ 
-            this.subjects[subjectIndex].marks = [mark]; 
-        } else {
-            this.subjects[subjectIndex].marks.push(mark);
-        }
+        this.subjects[subjectIndex].marks.push(mark);
     }
 
-    addMarks = function(subjectName, ...markValue) {
+    addMarks(markValue, subjectName) {
         for(const item of markValue) {
             if (isNaN(parseInt(item, 10)) || parseInt(item, 10) < 1 ||  parseInt(item, 10) > 5 ) {
                 return console.error('Ошибка, оценка должна быть числом от 1 до 5');
@@ -139,17 +135,16 @@ class Student {
 
         const subjectIndex = this.subjects.indexOf(findSubject);
 
-        if (findSubject.marks === undefined) {
-            this.subjects[subjectIndex].marks = [];
-        }
         this.subjects[subjectIndex].marks.push(...markValue);   
     }
 
-    getAverageBySubject = function(subjectName) {
+    getAverageBySubject(subjectName) {
         const findSubject = this.subjects.find(item => item.subject === subjectName);
 
         if (findSubject === undefined) {
             return console.error(`Предмет ${subjectName} еще не добавлен в программу`);
+        } else if (!findSubject.marks.length) {
+            return console.error(`Оценки по предмету ${subjectName} еще не внесены`)
         }
         
         const subjectIndex = this.subjects.indexOf(findSubject);
@@ -157,10 +152,19 @@ class Student {
     }
     
 
-    getAverage = function () {
+    getAverage() {
         if(!this.subjects.length) {
             return console.error('Студент еще не начал изучение программы');
         }
+
+        for(const item of this.subjects) {
+            const marksArr = [];
+            marksArr.push(item.marks);
+            if (marksArr.every(item => !item.length)) {
+                return console.error('Оценки по предметам еще не внесены');
+            } 
+        }
+
         return (
             this.subjects.reduce((acc, item) => {
                 return +(acc + this.getAverageBySubject(item.subject) / this.subjects.length);
@@ -168,7 +172,7 @@ class Student {
         );
     }
 
-    exclude = function (reason) {
+    exclude(reason) {
         if (this.excluded) {
             console.error(`Студент уже отчислен. Причина: ${reason}`);
         }
@@ -180,6 +184,7 @@ class Student {
 class Subject {
     constructor(subjectName) {
         this.subject = subjectName;
+        this.marks = [];
     }
 }
 
