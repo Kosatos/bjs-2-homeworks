@@ -1,10 +1,11 @@
 // Задача 1
 
 const parseCount = (value) => {
-    if (isNaN(parseInt(value, 10))) {
+    value = parseInt(value, 10);
+    if (isNaN(value)) {
         throw new Error('Невалидное значение');
     }
-    return parseInt(value, 10);
+    return value;
 }
 
 const validateCount = (value) => {
@@ -34,8 +35,8 @@ class Triangle {
     } 
 
     getArea() {
-        const semiperimeter = this.perimeter / 2;
-        return this.area = +((Math.sqrt(semiperimeter * (semiperimeter - this.a) * (semiperimeter - this.b) * (semiperimeter - this.b))).toFixed(3));
+        const semiperimeter = this.getPerimeter() / 2;
+        return this.area = +Math.sqrt(semiperimeter * (semiperimeter - this.a) * (semiperimeter - this.b) * (semiperimeter - this.b)).toFixed(3);
     }
 }
 
@@ -44,12 +45,8 @@ const getTriangle = (a, b, c) => {
         return new Triangle(a, b, c);
     } catch(err) {
         return {
-            getArea() {
-                return console.error('Ошибка! Треугольник не существует');
-            },
-            getPerimeter() {
-                return console.error('Ошибка! Треугольник не существует');
-            },
+            getArea: () => { return 'Ошибка! Треугольник не существует' },
+            getPerimeter: () => { return 'Ошибка! Треугольник не существует' },
         }
     }
 }
