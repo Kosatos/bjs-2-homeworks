@@ -17,22 +17,23 @@ class AlarmClock {
     }
 
     removeClock = (id) => {
-        const findId = this.alarmCollection.find(item => item.id === id);
+        const oldAlarmCollection = this.alarmCollection;
+        this.alarmCollection = this.alarmCollection.filter(item => item.id === !id);
 
-        if (!findId) {
-            return console.error('Звонка с таким id не существует')
+        if (oldAlarmCollection.length <= this.alarmCollection.length) {
+            return console.error('Звонка с таким id не существует');
+        } else {  
+            return console.log('Звонок удален');
         }
-        
-        this.alarmCollection.splice(this.alarmCollection.indexOf(findId), 1);
-
-        return console.log('Звонок удален')
     }
 
     getCurrentFormattedTime = () => {
         const currentDate = new Date();
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-
+        const hours = 
+            currentDate.getHours() < 10 ? `0${currentDate.getHours()}` : `${currentDate.getHours()}`;
+        const minutes = 
+            currentDate.getMinutes() < 10 ? `0${currentDate.getMinutes()}` : `${currentDate.getMinutes()}`;
+        
         return `${hours}:${minutes}`
     }
 
