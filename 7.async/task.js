@@ -13,7 +13,7 @@ class AlarmClock {
             return console.error('Звонок с таким id уже существует')
         }
         
-        this.alarmCollection.push({id: id, time: time, callback: callback});
+        this.alarmCollection.push(new Alarm(id, time, callback));
     }
 
     removeClock = (id) => {
@@ -44,16 +44,24 @@ class AlarmClock {
             }
         }
 
-        if (this.timerId === undefined) {
+        if (!this.alarmCollection.length) {
+            return console.warn('Вы не завели ни одного будильника');
+        }
+
+        if (!this.timerId) {
             this.timerId = setInterval(() => {
                 this.alarmCollection.forEach(checkClock);
-            })
+            }, 1000)
         } else {
             return console.warn('Таймер уже запущен');
         }
     }
 
     stop = () => {
+        if (!this.alarmCollection.length) {
+            return console.warn('Вы не завели ни одного будильника');
+        }
+        
         if (this.timerId) {
             clearTimeout(this.timerId);
             this.timerId = null;
@@ -72,6 +80,14 @@ class AlarmClock {
     clearAlarms = () => {
         this.stop();
         this.alarmCollection = [];
+    }
+}
+
+class Alarm {
+    constructor(id, time, callback) {
+        this.id = id;
+        this.time = time;
+        this.callback = callback;
     }
 }
 
