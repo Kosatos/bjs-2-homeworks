@@ -7,7 +7,7 @@ class AlarmClock {
     addClock = (time, callback, id) => {
         const findId = this.alarmCollection.find(item => item.id === id);
 
-        if (id === undefined) {
+        if (!id) {
             throw new Error('Невозможно идентифицировать будильник. Параметр id не передан.');
         } else if (findId) {
             return console.error('Звонок с таким id уже существует')
@@ -18,13 +18,9 @@ class AlarmClock {
 
     removeClock = (id) => {
         const oldAlarmCollection = this.alarmCollection;
-        this.alarmCollection = this.alarmCollection.filter(item => item.id === !id);
+        this.alarmCollection = this.alarmCollection.filter(item => item.id !== id);
 
-        if (oldAlarmCollection.length <= this.alarmCollection.length) {
-            return console.error('Звонка с таким id не существует');
-        } else {  
-            return console.log('Звонок удален');
-        }
+        return oldAlarmCollection.length > this.alarmCollection.length
     }
 
     getCurrentFormattedTime = () => {
